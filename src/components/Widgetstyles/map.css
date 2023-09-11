@@ -1,0 +1,62 @@
+.radar {
+    position: absolute;
+    top: 100px;
+    right: 60px;
+    /* height: auto; */
+    /* max-width: 40%; */
+    height: 40%;
+    width : 40%;
+    /* background-color: rgb(81, 86, 89);  */
+    /* border-radius: 10px; */
+    /* padding: 0.5%;  */
+    
+    
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 10px;
+    border:1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37); 
+
+}
+
+.header-radar{
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
+  color: white; /* Text color for better readability */
+  padding: 10px; /* Add padding to the header for spacing */
+  margin: 0; /* Remove margin to eliminate the gap above the header */
+  border-top-left-radius: 10px; /* Round the top-left corner */
+  border-top-right-radius: 10px;
+  font-weight: bold;
+  font-size: larger;
+
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+
+.map-wrap {
+    position: relative;
+    width: 100%;
+    height: 95%;
+    padding-top: 2%;
+  }
+
+
+.map {
+/* padding-top: 3%; */
+position: relative;
+border-radius: 10px;
+width: 100%;
+height: 80%;
+}
+
+
+/* @media (max-width: 500px) {
+  .radar{
+  top: 1100px;
+  }
+} */

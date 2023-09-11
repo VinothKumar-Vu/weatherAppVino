@@ -1,24 +1,48 @@
-import logo from './logo.svg';
-import './App.css';
+import NAVBAR from './components/NAVBAR';
+import CurrentWeatherWidget from './components/CurrentWeatherWidget';
+import ForecastWidget from './components/ForecastWidget';
+import TodaysWeather from './components/TodaysWeather';
+import { useState } from 'react';
+import Map from './components/MapWidget';
+import Welcome from './components/Welcome';
 
 function App() {
+  const [weatherData, setWeatherData] = useState({
+    weatherResponse: null,
+    forecastResponse: null,
+    timeZoneResponce: null,
+  });
+
+  const [showBeforeCondition, setShowBeforeCondition] = useState(true);
+
+  const valueChange = (weatherRep, forecastRep, timezoneVal) => {
+    setWeatherData((previousState) => ({
+      ...previousState,
+      weatherResponse: weatherRep,
+      forecastResponse: forecastRep,
+      timeZoneResponce: timezoneVal,
+    }));
+
+    // After changing the navbar, hide the component
+    setShowBeforeCondition(false);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <NAVBAR onValueChange={valueChange} />
+
+      {/* Render the component before the condition */}
+      {showBeforeCondition && <Welcome />}
+
+      {weatherData.weatherResponse !== null && weatherData.forecastResponse !== null && (
+        <>
+          <CurrentWeatherWidget data={weatherData.weatherResponse} timeZone={weatherData.timeZoneResponce} />
+          <Map data={weatherData.weatherResponse} />
+          <ForecastWidget data={weatherData.forecastResponse} timeZone={weatherData.timeZoneResponce} />
+          <TodaysWeather data={weatherData.weatherResponse} />
+        </>
+      )}
+    </>
   );
 }
 

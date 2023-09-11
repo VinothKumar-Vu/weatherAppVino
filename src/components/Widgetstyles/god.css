@@ -1,0 +1,20 @@
+/* Default styles for larger screens */
+.weather-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  /* Media query for smaller screens */
+  @media (max-width: 768px) {
+    .weather-container {
+      flex-direction: column;
+      align-items: center; /* Center components vertically */
+    }
+  
+    /* Adjust individual component styles if necessary */
+    .component-class {
+      /* New styles for smaller screens */
+    }
+  }
+  
