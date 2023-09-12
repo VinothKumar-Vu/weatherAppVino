@@ -11,8 +11,6 @@ const Map = ({ data }) => {
   maptilersdk.config.apiKey = '2JzcdaIQ5UcTJRx5tDAe';
 
   useEffect(() => {
-    // if (map.current) return;     this is preventing the updatation of the map, hence commented      // stops map from intializing more than once
-
     map.current = new maptilersdk.Map({
       container: mapContainer.current,
       style: maptilersdk.MapStyle.STREETS,
@@ -24,9 +22,7 @@ const Map = ({ data }) => {
     new maptilersdk.Marker({ color: "#FF0000" })
       .setLngLat([data.coord.lon, data.coord.lat])
       .addTo(map.current);
-
-  }, [cityCoord.lng, cityCoord.lat]);
-
+  }, [data.coord.lon, data.coord.lat, cityCoord.lng, cityCoord.lat, zoom]);
 
   return (
     <div className='radar'>
@@ -38,4 +34,4 @@ const Map = ({ data }) => {
   );
 }
 
-export default Map
+export default Map;
