@@ -12,4 +12,4 @@ export const geoApiOptions = {
 export const WEATHER_API_URL = "https://api.openweathermap.org/data/2.5/"
 export const WEATHER_API_KEY = "5271eb27d8f5ca778ab469d27065b167"
 
-export const TIMEZONE_API = "http://api.timezonedb.com/v2.1/get-time-zone?key=OJ9E2F25GIHT&format=json&by="
+export const TIMEZONE_API = "https://api.timezonedb.com/v2.1/get-time-zone?key=OJ9E2F25GIHT&format=json&by="
