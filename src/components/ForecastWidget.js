@@ -52,7 +52,7 @@ const ForecastWidget = (props) => {
           {/* <Box > */}
             <p>{time}</p>
             <p>{date} | {dayOfWeek}</p>
-            <p>{<img alt="Weather Description" src={`http://openweathermap.org/img/wn/${listElement.weather[0].icon}@2x.png`}/>}</p>
+            <p>{<img alt="Weather Description" src={`https://openweathermap.org/img/wn/${listElement.weather[0].icon}@2x.png`}/>}</p>
             <p>{listElement.weather[0].description}</p>
             <p><ThermostatIcon color="action"  fontSize="small"/> {listElement.main.temp_max}° / {listElement.main.temp_min}°</p> 
             {/* </Box> */}

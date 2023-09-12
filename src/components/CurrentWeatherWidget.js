@@ -37,7 +37,7 @@ const CurrentWeatherWidget = (props) => {
         </Grid>
 
         <Grid item xs={5}>
-          <img style={{ width: '150px', height: '150px' }} alt="Weather Icon" src={`http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`} />
+          <img style={{ width: '150px', height: '150px' }} alt="Weather Icon" src={`https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`} />
         </Grid>
 
 
