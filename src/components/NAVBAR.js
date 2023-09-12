@@ -50,7 +50,7 @@ const NAVBAR = ({onValueChange}) => {
 
       onValueChange(weatherResponse, forecastResponse,timezone);
     }
-  }, [weatherResponse, forecastResponse]);
+  }, [weatherResponse, forecastResponse, timezone]);
 
 
   return (
