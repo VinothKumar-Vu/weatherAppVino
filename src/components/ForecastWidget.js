@@ -1,7 +1,7 @@
 import React from 'react';
 import Grid from '@mui/material/Grid';
 import './Widgetstyles/forecast.css';
-import { DateTime,IANAZone  } from 'luxon';
+import { DateTime  } from 'luxon';
 import { useState,useEffect } from 'react';
 import ThermostatIcon from '@mui/icons-material/Thermostat';
 
