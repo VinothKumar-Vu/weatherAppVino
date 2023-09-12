@@ -8,7 +8,7 @@ const Map = ({ data }) => {
   const map = useRef(null);
   const cityCoord = { lng: data.coord.lon, lat: data.coord.lat };
   const [zoom] = useState(13);
-  maptilersdk.config.apiKey = '2JzcdaIQ5UcTJRx5tDAe';
+  maptilersdk.config.apiKey = '0oSexWcx3seAwWsAk3rg';
 
   useEffect(() => {
     map.current = new maptilersdk.Map({
