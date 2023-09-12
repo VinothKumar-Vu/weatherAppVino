@@ -17,12 +17,11 @@ const CurrentWeatherWidget = (props) => {
   const sunset_dateObject = DateTime.fromSeconds(data.sys.sunset, { zone: timeZone.zoneName }).toFormat('h:mm a')
 
 
-
   return (
     <div className="weather">
 
       <header className="header-current">
-        <label>{data.name},{data.city} As of {time_dateObject} ({timeZone.zoneName})</label>
+        <label>{data.name},{data.sys.country} As of {time_dateObject} ({timeZone.zoneName})</label>
       </header>
 
 

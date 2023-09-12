@@ -3,13 +3,9 @@ import AcUnitSharpIcon from '@mui/icons-material/AcUnitSharp';
 import './navbarstyles/navbar.css';
 import Search from "./Search";
 import { WEATHER_API_URL, WEATHER_API_KEY, TIMEZONE_API } from "./api";
-import { useEffect, useState, useCallback } from "react";
+import { useCallback } from "react";
 
 const NAVBAR = ({ onValueChange }) => {
-  const [weatherResponse, setCurrentWeather] = useState(null);
-  const [forecastResponse, setForecast] = useState(null);
-  const [timezone, setTimeZone] = useState(null);
-
   const HandleOnSearchChange = useCallback((f) => {
     const [lat, lon] = f.value.split(" ");
 
@@ -22,14 +18,6 @@ const NAVBAR = ({ onValueChange }) => {
         const weatherData = await responses[0].json();
         const forecastData = await responses[1].json();
         const timeZoneData = await responses[2].json();
-
-        setCurrentWeather({ city: f.label, ...weatherData });
-        setForecast({ city: f.label, ...forecastData });
-        setTimeZone({ city: f.label, ...timeZoneData });
-
-        // Now you can access these values immediately after setting state
-        console.log(weatherData.city);
-        console.log(timeZoneData.zoneName);
 
         onValueChange(weatherData, forecastData, timeZoneData);
       })

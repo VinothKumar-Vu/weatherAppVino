@@ -26,6 +26,7 @@ const ForecastWidget = (props) => {
     }
   }, [data]);
 
+
   
   return (
         <div className="forecast">

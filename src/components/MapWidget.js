@@ -26,7 +26,7 @@ const Map = ({ data }) => {
 
   return (
     <div className='radar'>
-      <header className="header-radar">Radar: {data.city}</header>
+      <header className="header-radar">Radar: {data.name}</header>
       <div className='map-wrap'>
         <div ref={mapContainer} className='map' />
       </div>

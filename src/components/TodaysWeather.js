@@ -17,7 +17,7 @@ const TodaysWeather = ({ data }) => {
 
     return (
         <div className="weather-today">
-            <header className="header-today">Weather Today in {data.city}</header>
+            <header className="header-today">Weather Today in {data.name}</header>
 
             <Grid container rowSpacing={2} columnSpacing={1} className='content-today'>
                 <Grid item xs={12}>
