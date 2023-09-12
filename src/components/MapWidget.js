@@ -1,36 +1,29 @@
-import React, { useRef, useEffect, useState } from 'react';
-import * as maptilersdk from '@maptiler/sdk';
-import "@maptiler/sdk/dist/maptiler-sdk.css";
+import React, { useState, useEffect } from 'react';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import './Widgetstyles/map.css';
 
 const Map = ({ data }) => {
-  const mapContainer = useRef(null);
-  const map = useRef(null);
-  const cityCoord = { lng: data.coord.lon, lat: data.coord.lat };
-  const [zoom] = useState(13);
-  maptilersdk.config.apiKey = '0oSexWcx3seAwWsAk3rg';
+  const [center,setCenter] = useState({ lng: data.coord.lon, lat: data.coord.lat });
 
   useEffect(() => {
-    map.current = new maptilersdk.Map({
-      container: mapContainer.current,
-      style: maptilersdk.MapStyle.STREETS,
-      center: [cityCoord.lng, cityCoord.lat],
-      zoom: zoom,
-      geolocateControl: false
-    });
-
-    new maptilersdk.Marker({ color: "#FF0000" })
-      .setLngLat([data.coord.lon, data.coord.lat])
-      .addTo(map.current);
-  }, [data.coord.lon, data.coord.lat, cityCoord.lng, cityCoord.lat, zoom]);
+      setCenter({ lng: data.coord.lon, lat: data.coord.lat });
+  }, [data]);
 
   return (
     <div className='radar'>
-      <header className="header-radar">Radar: {data.name}</header>
-      <div className='map-wrap'>
-        <div ref={mapContainer} className='map' />
-      </div>
-    </div >
+      <header className='header-radar'>Radar: {data.name}</header>
+      <MapContainer key={center.lng + center.lat} center={center} zoom={13} scrollWheelZoom={false}  style={{ width: "100%", height: "75%", marginTop: '10px', borderRadius: '6px'}}>
+        <TileLayer
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
+        <Marker position={center}>
+          <Popup>
+            A pretty CSS3 popup. <br /> Easily customizable.
+          </Popup>
+        </Marker>
+      </MapContainer>
+    </div>
   );
 }
 
