@@ -1,66 +1,51 @@
-import { AppBar,Toolbar } from "@mui/material"
-import AcUnitSharpIcon from '@mui/icons-material/AcUnitSharp'
+import { AppBar, Toolbar } from "@mui/material";
+import AcUnitSharpIcon from '@mui/icons-material/AcUnitSharp';
 import './navbarstyles/navbar.css';
 import Search from "./Search";
-import { WEATHER_API_URL, WEATHER_API_KEY,TIMEZONE_API } from "./api"
-import { useEffect,useState } from "react";
+import { WEATHER_API_URL, WEATHER_API_KEY, TIMEZONE_API } from "./api";
+import { useEffect, useState, useCallback } from "react";
 
-const NAVBAR = ({onValueChange}) => {
+const NAVBAR = ({ onValueChange }) => {
+  const [weatherResponse, setCurrentWeather] = useState(null);
+  const [forecastResponse, setForecast] = useState(null);
+  const [timezone, setTimeZone] = useState(null);
 
-    
-  const [weatherResponse,setCurrentWeather] = useState(null)
-  const [forecastResponse,setForcest] = useState(null)
+  const HandleOnSearchChange = useCallback((f) => {
+    const [lat, lon] = f.value.split(" ");
 
-  const [timezone,setTimeZone] = useState(null)
+    const currentWeatherFetch = fetch(`${WEATHER_API_URL}weather?lat=${lat}&lon=${lon}&appid=${WEATHER_API_KEY}&units=imperial`);
+    const forecastWeatherFetch = fetch(`${WEATHER_API_URL}forecast?lat=${lat}&lon=${lon}&appid=${WEATHER_API_KEY}&units=imperial`);
+    const timeZoneFetch = fetch(`${TIMEZONE_API}position&lat=${lat}&lng=${lon}`);
 
-  const HandleOnSearchChange = (f) =>{
+    Promise.all([currentWeatherFetch, forecastWeatherFetch, timeZoneFetch])
+      .then(async (responses) => {
+        const weatherData = await responses[0].json();
+        const forecastData = await responses[1].json();
+        const timeZoneData = await responses[2].json();
 
-    const [lat, lon] = f.value.split(" ")
+        setCurrentWeather({ city: f.label, ...weatherData });
+        setForecast({ city: f.label, ...forecastData });
+        setTimeZone({ city: f.label, ...timeZoneData });
 
-  
-    const currentWeatherFetch = fetch(`${WEATHER_API_URL}weather?lat=${lat}&lon=${lon}&appid=${WEATHER_API_KEY}&units=imperial`)
-  
-    const forecastWeatherfetch = fetch(`${WEATHER_API_URL}forecast?lat=${lat}&lon=${lon}&appid=${WEATHER_API_KEY}&units=imperial`)
+        // Now you can access these values immediately after setting state
+        console.log(weatherData.city);
+        console.log(timeZoneData.zoneName);
 
-    const timeeZonefetch = fetch(`${TIMEZONE_API}position&lat=${lat}&lng=${lon}`)
-
-
-    Promise.all([currentWeatherFetch, forecastWeatherfetch,timeeZonefetch])
-    .then(async(response)=> {
-      const weatherData  = await response[0].json()
-      const forecastData  = await response[1].json()
-      const timeZoneData = await response[2].json()
-      
-      setCurrentWeather({city: f.label, ...weatherData})
-      setForcest({city: f.label, ...forecastData})
-      setTimeZone({city: f.label, ...timeZoneData})
-
-      // console.log(weatherResponse.city)  if i run this here, it throws error at first, but inside useEffect it works fine.
-      // onValueChange(weatherResponse,forecastResponse)
-
-    })
-    .catch((err) => console.log(err))
-  }
-  
-  useEffect(() => {
-
-    if (weatherResponse !== null && forecastResponse !== null) {
-      console.log(weatherResponse.city)
-      console.log(timezone.zoneName)
-
-      onValueChange(weatherResponse, forecastResponse,timezone);
-    }
-  }, [weatherResponse, forecastResponse, timezone]);
-
+        onValueChange(weatherData, forecastData, timeZoneData);
+      })
+      .catch((err) => console.log(err));
+  }, [onValueChange]);
 
   return (
-      <AppBar>
-        <Toolbar className="custom-navbar1">
+    <AppBar>
+      <Toolbar className="custom-navbar1">
         <AcUnitSharpIcon fontSize="large" />
-        <div className="search-navbar1"><Search color='red' onSearchChange={HandleOnSearchChange}/></div>
-        </Toolbar>
-      </AppBar>
-  )
+        <div className="search-navbar1">
+          <Search color='red' onSearchChange={HandleOnSearchChange} />
+        </div>
+      </Toolbar>
+    </AppBar>
+  );
 }
 
-export default NAVBAR
+export default NAVBAR;
