@@ -1,10 +1,7 @@
 import React from 'react';
 import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
 import './Widgetstyles/forecast.css';
 import { DateTime,IANAZone  } from 'luxon';
-import moment from 'moment/moment';
-import { MomentTimezone } from 'moment-timezone';
 import { useState,useEffect } from 'react';
 import ThermostatIcon from '@mui/icons-material/Thermostat';
 
